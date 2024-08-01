@@ -10,6 +10,7 @@ alias cm="chezmoi"
 alias cme="chezmoi edit"
 alias cma="chezmoi -v apply"
 alias cmf="chezmoi edit ~/.config/fish/config.fish"
+alias cmv="chezmoi edit ~/.config/nvim/init.lua"
 
 alias gs="git status"
 alias gco="git checkout"

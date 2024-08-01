@@ -5,3 +5,4 @@ packages:
       - 'zellij'
       - 'fnm'
     casks:
+      - 'font-hack-nerd-font'
