@@ -4,5 +4,6 @@ packages:
       - 'nvim'
       - 'zellij'
       - 'fnm'
+      - 'ranger'
     casks:
       - 'font-hack-nerd-font'

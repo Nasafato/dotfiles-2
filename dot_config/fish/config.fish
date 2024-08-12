@@ -11,9 +11,12 @@ alias cme="chezmoi edit"
 alias cma="chezmoi -v apply"
 alias cmf="chezmoi edit ~/.config/fish/config.fish"
 alias cmv="chezmoi edit ~/.config/nvim/init.lua"
+alias cmw="chezmoi edit ~/.config/wezterm/wezterm.lua"
 
 alias gs="git status"
 alias gco="git checkout"
+alias grbc="git rebase --continue"
+alias grb="git rebase"
 alias g="cd ~/dev/goldcard"
 
 if status is-interactive
