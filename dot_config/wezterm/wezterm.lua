@@ -84,31 +84,24 @@ config.keys = {
 -- }
 config.switch_to_last_active_tab_when_closing_tab = true
 
---config.color_scheme = "Batman"
--- config.color_scheme = "Broadcast"
--- config.color_scheme = "Solarized (dark) (terminal.sexy)"
--- config.color_scheme = "Solarized Dark - Patched"
--- config.color_scheme = "Solarized Darcula"
 config.skip_close_confirmation_for_processes_named = {}
 
-local function scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "Catppuccin Mocha"
-	else
-		return "Catppuccin Latte"
+local function merge(t1, t2)
+	for k, v in pairs(t2) do
+		t1[k] = v
 	end
 end
 
--- config.colors = theme.colors()
--- config.window_frame = theme.window_frame()
--- config.color_scheme = "Dracula"
--- config.color_scheme = "Dracula (Official)"
--- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
-config.color_scheme = "Catppuccin Mocha"
-config.tab_bar_at_bottom = true
-config.window_decorations = "RESIZE"
-config.font = wezterm.font("Hack Nerd Font Mono")
--- config.font = wezterm.font("Dank Mono")
-config.font_size = 13.0
+-- Appearance
+merge(config, {
+	color_scheme = "Catppuccin Mocha",
+	tab_bar_at_bottom = true,
+	window_decorations = "RESIZE",
+	font = wezterm.font("Hack Nerd Font Mono"),
+	font_size = 13.0,
+})
+
+return config
+
 
 return config
