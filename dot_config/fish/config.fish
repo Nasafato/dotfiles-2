@@ -41,7 +41,6 @@ function edit_command_buffer --description 'Edit command line in external editor
     end
 end
 
-# Binds the edit_command_buffer function to the key sequence Ctrl+x Ctrl+e.
 function fish_user_key_bindings
     bind \cx\ce edit_command_buffer
 end

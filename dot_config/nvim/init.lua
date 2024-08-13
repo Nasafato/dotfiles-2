@@ -86,7 +86,10 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 vim.keymap.set("n", "L", "$")
 vim.keymap.set("v", "L", "$")
+vim.keymap.set("o", "L", "$")
 vim.keymap.set("n", "H", "^")
+vim.keymap.set("v", "H", "^")
+vim.keymap.set("o", "H", "^")
 
 --  See `:help lua-guide-autocommands`
 -- Highlight when yanking (copying) text
@@ -120,7 +123,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth",
-	"tpope/vim-vinegar",
+	{
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end,
+	},
 
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
