@@ -1,17 +1,8 @@
 local wezterm = require("wezterm")
 local config = {}
-local theme = require("lua/rose-pine").main
 local act = wezterm.action
 
--- Tries to add luarocks packages
 package.path = "/opt/homebrew/share/lua/5.4/?.lua;" .. package.path
-
-local function append(t1, t2)
-	for k, v in pairs(t2) do
-		print(v)
-		table.insert(t1, v)
-	end
-end
 
 local function merge(t1, t2)
 	for k, v in pairs(t2) do
@@ -93,7 +84,7 @@ config.keys = {
 		mods = "LEADER",
 		action = act.Multiple({
 			act.AdjustPaneSize({ "Left", 5 }),
-			act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
+			act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 350 }),
 		}),
 	},
 	{
@@ -101,7 +92,7 @@ config.keys = {
 		mods = "LEADER",
 		action = act.Multiple({
 			act.AdjustPaneSize({ "Down", 5 }),
-			act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
+			act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 350 }),
 		}),
 	},
 	{
@@ -109,7 +100,7 @@ config.keys = {
 		mods = "LEADER",
 		action = act.Multiple({
 			act.AdjustPaneSize({ "Up", 5 }),
-			act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
+			act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 350 }),
 		}),
 	},
 	{
@@ -117,7 +108,7 @@ config.keys = {
 		mods = "LEADER",
 		action = act.Multiple({
 			act.AdjustPaneSize({ "Right", 5 }),
-			act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
+			act.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 350 }),
 		}),
 	},
 }
@@ -129,7 +120,6 @@ local resize_keymaps = {
 		key = "H",
 		action = act.Multiple({
 			act.AdjustPaneSize({ "Left", 5 }),
-			act.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
 		}),
 	},
 	{
@@ -156,20 +146,6 @@ config.key_tables = {
 	resize_pane = resize_keymaps,
 }
 
-local function map(t1, cb)
-	for k, v in pairs(t1) do
-		t1[v] = cb(k)
-	end
-end
-
-local inspect = require("inspect")
-
-map(config.key_tables.resize_pane, function(keymap)
-	wezterm.log_info(keymap)
-	print(inspect(keymap))
-end)
-print("asdfa")
-
 wezterm.on("update-right-status", function(window, pane)
 	local name = window:active_key_table()
 	if name then
@@ -179,11 +155,7 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(name or "")
 end)
 
-append(config.keys, resize_keymaps)
-
 config.skip_close_confirmation_for_processes_named = {}
-
-print(config.keys)
 
 -- Appearance
 merge(config, {
