@@ -21,6 +21,8 @@ vim.g.have_nerd_font = true
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+--
+package.path = "/Users/alangou/.luarocks/lib/luarocks/rocks-5.1/?.lua" .. package.path
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -461,9 +463,6 @@ require("lazy").setup({
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
 			--  Add any additional override configuration in the following tables. Available keys are:
 			--  - cmd (table): Override the default command used to start the server
 			--  - filetypes (table): Override the default list of associated filetypes for the server
@@ -494,6 +493,9 @@ require("lazy").setup({
 							completion = {
 								callSnippet = "Replace",
 							},
+							diagnostics = {
+								globals = { "vim" },
+							},
 							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 							-- diagnostics = { disable = { 'missing-fields' } },
 						},
@@ -520,12 +522,21 @@ require("lazy").setup({
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
+						-- local inspect = require("inspect")
 						local server = servers[server_name] or {}
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for tsserver)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
+
+						local nvim_lsp = require("lspconfig")
+						if server_name == "denols" then
+							server.root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
+						elseif server_name == "tsserver" then
+							server.root_dir = nvim_lsp.util.root_pattern("package.json")
+						end
+
+						nvim_lsp[server_name].setup(server)
 					end,
 				},
 			})
