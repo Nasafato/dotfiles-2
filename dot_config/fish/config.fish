@@ -2,6 +2,7 @@ set -x PATH $HOME/.local/bin /usr/local/bin $PATH /opt/homebrew/bin
 set -x EDITOR nvim
 set -x VISUAL nvim
 
+
 alias vim='nvim'
 alias cat='bat'
 alias ls='eza';
@@ -12,12 +13,15 @@ alias cma="chezmoi -v apply"
 alias cmf="chezmoi edit ~/.config/fish/config.fish"
 alias cmv="chezmoi edit ~/.config/nvim/init.lua"
 alias cmw="chezmoi edit ~/.config/wezterm/wezterm.lua"
+alias irypmd="infisical run -- yarn prisma migrate dev"
 
 alias gs="git status"
 alias gco="git checkout"
 alias grbc="git rebase --continue"
 alias grb="git rebase"
 alias g="cd ~/dev/goldcard"
+
+#source "$HOME/.config/fish/work/latent.fish"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here

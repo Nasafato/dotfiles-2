@@ -13,15 +13,15 @@ If you experience any errors while trying to install kickstart, run `:checkhealt
 
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "-"
-vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
---
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+vim.g.have_nerd_font = true
 package.path = "/Users/alangou/.luarocks/lib/luarocks/rocks-5.1/?.lua" .. package.path
 
 vim.opt.number = true
@@ -63,6 +63,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("i", "<C-k>", "<Down>")
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -85,6 +86,7 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("i", "<C-f>", "<Enter>")
 
 vim.keymap.set("n", "L", "$")
 vim.keymap.set("v", "L", "$")
@@ -92,6 +94,10 @@ vim.keymap.set("o", "L", "$")
 vim.keymap.set("n", "H", "^")
 vim.keymap.set("v", "H", "^")
 vim.keymap.set("o", "H", "^")
+
+vim.g.markdown_fenced_languages = {
+	"ts=typescript",
+}
 
 --  See `:help lua-guide-autocommands`
 -- Highlight when yanking (copying) text
@@ -129,6 +135,7 @@ require("lazy").setup({
 		"stevearc/oil.nvim",
 		config = function()
 			require("oil").setup()
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 		end,
 	},
 
@@ -482,8 +489,13 @@ require("lazy").setup({
 				-- But for many setups, the LSP (`tsserver`) will work just fine
 				-- tsserver = {},
 				--
-				denols = {},
-				tsserver = {},
+				denols = {
+					single_file_support = true,
+				},
+				jsonls = {},
+				tsserver = {
+					single_file_support = false,
+				},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -647,13 +659,13 @@ require("lazy").setup({
 					-- Accept ([y]es) the completion.
 					--  This will auto-import if your LSP supports it.
 					--  This will expand snippets if the LSP sent a snippet.
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					-- ["<C-y>"] = cmp.mapping.confirm({ select = true }),
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
-					--['<CR>'] = cmp.mapping.confirm { select = true },
-					--['<Tab>'] = cmp.mapping.select_next_item(),
-					--['<S-Tab>'] = cmp.mapping.select_prev_item(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					-- ["<Tab>"] = cmp.mapping.select_next_item(),
+					-- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
 					-- Manually trigger a completion from nvim-cmp.
 					--  Generally you don't need this, because nvim-cmp will display
