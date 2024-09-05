@@ -21,7 +21,7 @@ function dump_db
                 -h localhost -p 5433 -U common_postgres
         case 340b
             PGPASSWORD=postgres pg_dump \
-                --dbname=340b \ 
+                --dbname=340b \
                 --data-only \
                 --exclude-table=_prisma_migrations \
                 --file="/Users/alangou/data/dumps/340b.sql" \
