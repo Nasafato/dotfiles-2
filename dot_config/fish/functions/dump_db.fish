@@ -20,13 +20,15 @@ function dump_db
                 --schema='public' \
                 -h localhost -p 5433 -U common_postgres
         case 340b
-            PGPASSWORD=common_postgres pg_dump \
-                --exclude-table=_prisma_migrations \
+            PGPASSWORD=postgres pg_dump \
                 --dbname=340b \ 
                 --data-only \
-                --file="/Users/alangou/data/dumps/340b" \
+                --exclude-table=_prisma_migrations \
+                --file="/Users/alangou/data/dumps/340b.sql" \
                 --schema='public' \
-        -h localhost -p 5432 -U postgres
+                -h localhost \
+                -p 5432 \
+                -U postgres
         case '*'
             echo "Invalid database specified. Use 'gc', 'common', or '340b'."
             return 1
