@@ -13,11 +13,11 @@ alias cma="chezmoi -v apply"
 alias cmf="chezmoi edit ~/.config/fish/config.fish"
 alias cmv="chezmoi edit ~/.config/nvim/init.lua"
 alias cmw="chezmoi edit ~/.config/wezterm/wezterm.lua"
-alias irypmd="infisical run -- yarn prisma migrate dev"
 
 alias gs="git status"
 alias gco="git checkout"
 alias grbc="git rebase --continue"
+alias gau="git add -u"
 alias grb="git rebase"
 alias g="cd ~/dev/goldcard"
 
