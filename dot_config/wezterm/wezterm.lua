@@ -30,7 +30,7 @@ config.keys = {
 	{
 		mods = "LEADER",
 		key = "c",
-		action = act.CreateTab(),
+		action = act.SpawnTab("CurrentPaneDomain"),
 	},
 	{
 		mods = "LEADER",
