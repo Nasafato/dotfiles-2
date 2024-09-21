@@ -29,6 +29,11 @@ config.keys = {
 	},
 	{
 		mods = "LEADER",
+		key = "c",
+		action = act.CreateTab(),
+	},
+	{
+		mods = "LEADER",
 		key = "l",
 		action = act.ActivatePaneDirection("Right"),
 	},
