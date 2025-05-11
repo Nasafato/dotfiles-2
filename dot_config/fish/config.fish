@@ -1,9 +1,11 @@
-set -x PATH $HOME/.local/bin /usr/local/bin $PATH /opt/homebrew/bin $HOME/.orbstack/bin $HOME/.deno/bin $HOME/Library/Application\ Support/edgedb/bin
+set -x PATH $HOME/.local/bin /usr/local/bin /opt/homebrew/bin $PATH $HOME/.orbstack/bin $HOME/.deno/bin $HOME/Library/Application\ Support/edgedb/bin
 set -x EDITOR nvim
 set -x VISUAL nvim
 
 fnm env --use-on-cd --shell fish | source
 
+alias o='cd ~/dev/@agou/odysseus'
+alias p='pnpm'
 alias vim='nvim'
 alias cat='bat'
 alias ls='eza';
@@ -23,6 +25,7 @@ alias grb="git rebase"
 alias g="cd ~/dev/goldcard"
 
 alias s="cd ~/dev/@agou/syntheus"
+alias a="cd ~/dev/@agou"
 
 #source "$HOME/.config/fish/work/latent.fish"
 
